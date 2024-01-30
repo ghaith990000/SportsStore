@@ -28,4 +28,14 @@ export class StoreComponent {
   changePage(newPage: number){
     this.selectedPage = newPage;
   }
+
+  changePageSize(newSize: number){
+    this.productsPerPage = Number(newSize);
+    this.changePage(1);
+  }
+
+  get pageNumbers(): number[] {
+    return Array(Math.ceil(this.repository.getProducts(this.selectedCategory).length / this.productsPerPage)).fill(0).map((x, i) => i + 1);
+  }
+
 }
